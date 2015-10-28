@@ -18,6 +18,10 @@ server {
   <% if @application[:ssl_certificate_ca] -%>
   ssl_client_certificate <%= node[:nginx][:dir] %>/ssl/<%= @application[:domains].first %>.ca;
   <% end -%>
+  
+  ssl_protocols <%= node[:nginx][:ssl_protocols] %>;
+  ssl_ciphers "<%= node[:nginx][:ssl_ciphers] %>";
+  ssl_prefer_server_ciphers on;
 
   location / {
     root   <%= @application[:absolute_document_root] %>;
